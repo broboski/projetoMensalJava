@@ -3,7 +3,7 @@ public class Armas extends Itens {
     String tipoArma;
 
     // Construtor da classe Armas
-    public Armas(String tipoArma, int preco, float forca, float magia, float resistencia, float dano) {
+    public Armas(String tipoArma, float preco, float forca, float magia, float resistencia, int dano) {
         super(preco, forca, magia, resistencia, dano);
         this.tipoArma = tipoArma;
     }

@@ -1,11 +1,11 @@
 public class Itens {
-    int preco;
+    float preco;
     float forca;
     float magia;
     float resistencia;
-    float dano;
+    int dano;
 
-    public Itens(int preco, float forca, float magia, float resistencia, float dano){
+    public Itens(float preco, float forca, float magia, float resistencia, int dano){
         this.preco = preco;
         this.forca = forca;
         this.magia = magia;

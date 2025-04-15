@@ -18,6 +18,19 @@ public class Main {
             Loja loja = BancoPopulador.popularBancoDeDados(session);
             Jogador jogador = session.createQuery("FROM Jogador", Jogador.class).setMaxResults(1).uniqueResult();
 
+            if (jogador == null) {
+                if (jogador == null) {
+                    jogador = new Jogador("Heroi");
+                    jogador.setGold(100);
+
+                    session.persist(jogador);
+                    System.out.println("Novo jogador criado: " + jogador.getNome());
+                }
+                tx.commit();
+
+            }
+
+
             tx.commit();
 
             Menu menu = new Menu(loja, jogador, session);
@@ -29,7 +42,9 @@ public class Main {
             }
             e.printStackTrace();
         } finally {
-            session.close();
+            if (session.isOpen()) {
+                session.close();
+            }
             HibernateUtil.shutdown();
         }
     }

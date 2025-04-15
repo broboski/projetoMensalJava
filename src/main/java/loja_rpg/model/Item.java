@@ -2,18 +2,18 @@ package loja_rpg.model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "classe_item") // ou "DTYPE" por padrão
+@Entity //mapeia a classe para uma tabela no banco de dados.
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Todas as subclasses de item serão armazenadas em uma única tabela
+@DiscriminatorColumn(name = "classe_item") // Define a coluna usada para diferenciar os tipos de item
 public abstract class Item {
-    @Id
+    @Id // identificador único gerado automaticamente pelo banco.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int codigo;
     private String nome;
     private int preco;
     @Enumerated(EnumType.STRING)
-    private TipoItem tipo;
+    private TipoItem tipo; // enum
 
     // Construtores
     public Item() {} // Construtor padrão

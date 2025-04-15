@@ -3,8 +3,8 @@ package loja_rpg.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.DiscriminatorValue;
 
-@Entity
-@DiscriminatorValue("ARMA")
+@Entity //mapeia a classe para uma tabela no banco de dados.
+@DiscriminatorValue("ARMA") //herança com uma única tabela
 public class Arma extends Item {
     private String tipoArma; // Tipo da arma, como "Espada", "Arco", etc.
     private int dano;
@@ -29,6 +29,7 @@ public class Arma extends Item {
     }
 
     @Override
+
     public void usar() {
         System.out.println("Você usou a arma: " + getNome() + " causando " + dano + " de dano!");
     }

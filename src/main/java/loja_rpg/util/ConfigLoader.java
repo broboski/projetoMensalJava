@@ -8,7 +8,7 @@ public class ConfigLoader {
 
     private static final Properties properties = new Properties();
 
-    static {
+    static { // Abre o arquivo config.properties e carrega as chaves e valores do arquivo
         try (InputStream input = ConfigLoader.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
                 throw new RuntimeException("Arquivo config.properties não encontrado em resources!");

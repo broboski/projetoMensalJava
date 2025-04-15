@@ -4,8 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.DiscriminatorValue;
 import loja_rpg.InterfaceConsumivel;
 
-@Entity
-@DiscriminatorValue("POCAO")
+@Entity //mapeia a classe para uma tabela no banco de dados.
+@DiscriminatorValue("POCAO") //herança com uma única tabela
 public class Pocao extends Item implements InterfaceConsumivel {
     private int cura;
 

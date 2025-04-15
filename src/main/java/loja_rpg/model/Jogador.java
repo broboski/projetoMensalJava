@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity //mapeia a classe para uma tabela no banco de dados.
 public class Jogador {
 
     @Id
@@ -15,7 +15,7 @@ public class Jogador {
     private String nome;
     private int gold;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // os itens do inventário são atualizados junto com o jogador, e o inventário só é carregado quando chama a função para evitar lag
     private List<Item> inventario = new ArrayList<>();
 
     // Construtor padrão exigido pelo JPA

@@ -3,8 +3,8 @@ package loja_rpg.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.DiscriminatorValue;
 
-@Entity
-@DiscriminatorValue("ARMADURA")
+@Entity //mapeia a classe para uma tabela no banco de dados.
+@DiscriminatorValue("ARMADURA") //herança com uma única tabela
 public class Armadura extends Item {
     private int defesa;
 

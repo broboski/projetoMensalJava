@@ -40,6 +40,8 @@ public abstract class Item {
     public TipoItem getTipo() { return tipo; }
 
     public void setPreco(int preco) { this.preco = preco; }
+    public void setNome(String nome) { this.nome = nome; }
+
 
     // Método abstrato para uso do item
     public abstract void usar();

@@ -30,10 +30,12 @@ public class Menu {
             jogador.mostrarGold();
             System.out.println("1. Listar itens da loja");
             System.out.println("2. Adicionar um item à loja");
-            System.out.println("3. Resetar loja para itens iniciais");
-            System.out.println("4. Comprar item");
-            System.out.println("5. Ver inventário");
-            System.out.println("6. Consultas personalizadas");
+            System.out.println("3. Remover um item da loja");
+            System.out.println("4. Modificar um item da loja");
+            System.out.println("5. Resetar loja para itens iniciais");
+            System.out.println("6. Comprar item");
+            System.out.println("7. Ver inventário");
+            System.out.println("8. Consultas personalizadas");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             escolha = scanner.nextInt();
@@ -47,15 +49,21 @@ public class Menu {
                     loja.addItem(); // Adiciona um novo item à loja via terminal
                     break;
                 case 3:
-                    resetarLoja(); // Restaura os itens iniciais da loja
+                    loja.removerItem(); // Remove um item específico da loja
                     break;
                 case 4:
-                    comprarItem(); // Permite o jogador comprar um item da loja
+                    loja.modificarItem(); // Modifica um item existente da loja.
                     break;
                 case 5:
-                    jogador.listarInventario(); // Mostra os itens que o jogador possui
+                    resetarLoja(); // Restaura os itens iniciais da loja
                     break;
                 case 6:
+                    comprarItem(); // Permite o jogador comprar um item da loja
+                    break;
+                case 7:
+                    jogador.listarInventario(); // Mostra os itens que o jogador possui
+                    break;
+                case 8:
                     consultasPersonalizadas(); // Executa consultas específicas no banco
                     break;
                 case 0:

@@ -145,6 +145,92 @@ public class Loja {
         }
     }
 
+    public void modificarItem() {
+        if (itens.isEmpty()) {
+            System.out.println("A loja não tem itens disponíveis.");
+            return;
+        }
+
+        listarItens();
+        System.out.print("Digite o código do item que deseja modificar: ");
+        int codigo = scanner.nextInt();
+        scanner.nextLine();
+
+        Item itemEncontrado = buscarItem(codigo);
+
+        if (itemEncontrado == null) {
+            System.out.println("Item não encontrado!");
+            return;
+        }
+
+        System.out.println("Modificando o item: " + itemEncontrado.getNome());
+        System.out.print("Novo nome (deixe em branco para manter): ");
+        String novoNome = scanner.nextLine();
+        if (!novoNome.isEmpty()) {
+            itemEncontrado.setNome(novoNome);
+        }
+
+        System.out.print("Novo preço (ou 0 para manter): ");
+        int novoPreco = scanner.nextInt();
+        scanner.nextLine();
+        if (novoPreco > 0) {
+            itemEncontrado.setPreco(novoPreco);
+        }
+
+        // Atualiza no banco
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+            session.merge(itemEncontrado); // atualiza o item
+            tx.commit();
+            System.out.println("Item modificado com sucesso no banco!");
+        } catch (Exception e) {
+            System.err.println("Erro ao atualizar item no banco: " + e.getMessage());
+        }
+    }
+    public void removerItem() {
+        if (itens.isEmpty()) {
+            System.out.println("A loja não tem itens disponíveis.");
+            return;
+        }
+
+        listarItens();
+        System.out.print("Digite o código do item que deseja remover: ");
+        int codigo = scanner.nextInt();
+        scanner.nextLine();
+
+        Item itemEncontrado = buscarItem(codigo);
+
+        if (itemEncontrado == null) {
+            System.out.println("Item não encontrado!");
+            return;
+        }
+
+        // Remove da lista
+        itens.remove(itemEncontrado);
+
+        // Remove do banco
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+
+            // Busca o item pelo campo "codigo", não pelo ID
+            Item itemParaDeletar = session
+                    .createQuery("FROM Item WHERE codigo = :codigo", Item.class)
+                    .setParameter("codigo", itemEncontrado.getCodigo())
+                    .uniqueResult();
+
+            if (itemParaDeletar != null) {
+                session.remove(itemParaDeletar);
+                tx.commit();
+                System.out.println("Item removido com sucesso do banco!");
+            } else {
+                System.out.println("Item não encontrado no banco.");
+                tx.rollback();
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao remover item do banco: " + e.getMessage());
+        }
+
+    }
 
 
     // Lista os itens em memória
